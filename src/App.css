@@ -1,0 +1,108 @@
+.main-task-background {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  transition: background-color 0.5s;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: black;
+}
+
+.main-task-container {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 30px 20px;
+  width: 430px;
+  border-radius: 10px;
+  margin: 10% 0px;
+  max-width: 620px;
+  height: 370px;
+  background-size: contain;
+}
+
+.main-task-container > div:not(:first-child) {
+  margin-top: 16px;
+}
+
+.task-container {
+  background-color: #fffffffa;
+  opacity: 1;
+  padding: 10px 10px;
+  border-radius: 10px;
+  text-align: left;
+}
+
+.task-container > span:first-child {
+  font-size: 30px;
+  padding-right: 5px;
+}
+
+.task-container > span:nth-child(2) {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.timer-label {
+  color: rgb(54, 50, 50);
+  font-weight: bold;
+  font-size: 90px;
+  padding: 30px 0px;
+}
+
+.end-timer-container {
+  display: flex;
+  padding-left: 15px;
+}
+
+.end-timer-container > button {
+  background-color: white;
+  font-weight: bold;
+}
+
+.end-timer-container > button:hover {
+  background-color: #00000014;
+  color: white;
+}
+
+.end-timer-container > span:last-child {
+  margin-left: auto;
+  color: rgb(54, 50, 50);
+  font-size: 20px;
+}
+
+.end-timer-container > span > span {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.quote {
+  text-align: center;
+  margin: 30px;
+  padding: 30px;
+
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 500;
+  width: 60%;
+  background-color: beige;
+  border-radius: 10px;
+}
+
+.quote-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+@media screen and (max-width: 480px) {
+  .main-task-background {
+    align-items: center;
+    background-position: top;
+  }
+  .main-task-container {
+    padding: 20px 20px 50px 20px;
+    margin-top: 80px;
+  }
+}
