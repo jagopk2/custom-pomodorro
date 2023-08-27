@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "./static/css/main.4dcaa26c.chunk.css",
+    "main.js": "./static/js/main.c8cb3e67.chunk.js",
+    "main.js.map": "./static/js/main.c8cb3e67.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.6501f6c7.js",
+    "runtime-main.js.map": "./static/js/runtime-main.6501f6c7.js.map",
+    "static/js/2.d5b44423.chunk.js": "./static/js/2.d5b44423.chunk.js",
+    "static/js/2.d5b44423.chunk.js.map": "./static/js/2.d5b44423.chunk.js.map",
+    "static/js/3.07cb620b.chunk.js": "./static/js/3.07cb620b.chunk.js",
+    "static/js/3.07cb620b.chunk.js.map": "./static/js/3.07cb620b.chunk.js.map",
+    "index.html": "./index.html",
+    "static/css/main.4dcaa26c.chunk.css.map": "./static/css/main.4dcaa26c.chunk.css.map",
+    "static/js/2.d5b44423.chunk.js.LICENSE.txt": "./static/js/2.d5b44423.chunk.js.LICENSE.txt",
+    "static/media/motivation1.76cc0618.mp3": "./static/media/motivation1.76cc0618.mp3",
+    "static/media/ring.10c62103.mp3": "./static/media/ring.10c62103.mp3",
+    "static/media/walpaper.e4a54560.jpg": "./static/media/walpaper.e4a54560.jpg",
+    "static/media/wn.aef8018f.mp3": "./static/media/wn.aef8018f.mp3"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6501f6c7.js",
+    "static/js/2.d5b44423.chunk.js",
+    "static/css/main.4dcaa26c.chunk.css",
+    "static/js/main.c8cb3e67.chunk.js"
+  ]
+}
