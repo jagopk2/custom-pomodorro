@@ -8,7 +8,6 @@ import { timerContext } from "../../App";
 import motivation1 from "../../images/motivation1.mp3";
 import wn from "../../images/wn.mp3";
 
-
 const EndTime = memo((props) => {
   const {
     pomodoroType,
@@ -20,8 +19,15 @@ const EndTime = memo((props) => {
     seconds,
   } = props;
   const { dispatch } = useContext(PomodoroContext);
-  const { short, long, study, revise, whiteNoise, motivation } =
-    useContext(timerContext);
+  const {
+    short,
+    long,
+    study,
+    revise,
+    whiteNoise,
+    motivation,
+    whiteNoiseRevision,
+  } = useContext(timerContext);
   const [audio, setAudio] = useState(null);
 
   const endTime = new Date();
@@ -59,15 +65,16 @@ const EndTime = memo((props) => {
 
     if (!timerStarted) {
       // Play the appropriate sound based on the timer type
-      if (
-        (pomodoroType === "pomodoro" || pomodoroType === "revision") &&
-        whiteNoise
-      ) {
+      if (pomodoroType === "pomodoro" && whiteNoise) {
         const newAudio = new Audio(wn);
         setAudio(newAudio);
         newAudio.play();
       } else if (pomodoroType === "short_break" && motivation) {
         const newAudio = new Audio(motivation1);
+        setAudio(newAudio);
+        newAudio.play();
+      } else if (pomodoroType === "revision" && whiteNoiseRevision) {
+        const newAudio = new Audio(wn);
         setAudio(newAudio);
         newAudio.play();
       }

@@ -4,11 +4,14 @@ import { useMemo, useRef, useEffect } from "react";
 import { PomodoroProvider } from "./context/PomodoroContext";
 import SaveButton from "./components/SaveButton";
 import React from "react";
+import { Container, IconButton } from "@mui/material";
+import SettingsIcon from "@mui/icons-material/Settings";
+import { Link } from 'react-router-dom';
 const getQuote = require("randoquoter");
 
 export const timerContext = React.createContext();
 
-const defaultTimerValue = {
+export const defaultTimerValue = {
   study: 1500,
   short: 300,
   long: 900,
@@ -16,6 +19,7 @@ const defaultTimerValue = {
   bell: true,
   notification: true,
   whiteNoise: true,
+  whiteNoiseRevision: true,
   motivation: true,
   quotes: true,
 };
@@ -67,6 +71,16 @@ const App = () => {
   return (
     <>
       <timerContext.Provider value={initialTimerValue}>
+        <IconButton
+          edge="start"
+          color="primary"
+          aria-label="settings"
+          component={Link}
+          to="/settings"
+          style={{ position: "absolute", top: 30, left: 30 }}
+        >
+          <SettingsIcon />
+        </IconButton>
         <PomodoroProvider>
           <MainTask themes={themes} />
         </PomodoroProvider>
