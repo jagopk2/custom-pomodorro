@@ -28,6 +28,8 @@ const TaskTimer = memo((props) => {
       showNotification("Timer Finished", `Time's for ${pomodoroType} up!`);
       // Additional logic like switching to the next task, if needed
     }
+
+    document.title = `Timer: ${formatSecondsIntoMinutesAndSeconds(seconds)}`;
   }, [seconds]);
 
   // Function to show the notification

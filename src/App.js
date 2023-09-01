@@ -6,7 +6,8 @@ import SaveButton from "./components/SaveButton";
 import React from "react";
 import { Container, IconButton } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import useStayAwake from "use-stay-awake";
 const getQuote = require("randoquoter");
 
 export const timerContext = React.createContext();
@@ -19,13 +20,18 @@ export const defaultTimerValue = {
   bell: true,
   notification: true,
   whiteNoise: true,
+  whiteNoiseVolume: 100, // Adjust the default volume range to 1-100
   whiteNoiseRevision: true,
+  whiteNoiseRevisionVolume: 100, // Adjust the default volume range to 1-100
   motivation: true,
+  motivationVolume: 100, // Adjust the default volume range to 1-100
   quotes: true,
+  preventSleep: true, //
 };
 
 const App = () => {
   const gridRef = useRef(null);
+  const device = useStayAwake();
 
   const themes = useMemo(
     () => ({
@@ -64,7 +70,14 @@ const App = () => {
     if (!savedTimerValues) {
       localStorage.setItem("timerValues", JSON.stringify(defaultTimerValue));
     }
+    device.preventSleeping();
   }, []);
+
+  useEffect(() => {
+    if (initialTimerValue.preventSleep) {
+      device.preventSleeping();
+    }
+  }, [initialTimerValue.preventSleep]);
 
   const quote = getQuote.getRandomQuote();
 

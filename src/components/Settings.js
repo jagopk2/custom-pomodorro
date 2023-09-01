@@ -10,19 +10,7 @@ import {
   Grid,
 } from "@mui/material";
 import background from "../images/walpaper.jpg";
-
-const defaultTimerValue = {
-  study: 1500,
-  short: 300,
-  long: 900,
-  revise: 301,
-  bell: true,
-  notification: true,
-  whiteNoise: true,
-  whiteNoiseRevision: true,
-  motivation: true,
-  quotes: true,
-};
+import { defaultTimerValue } from "../App";
 
 const SettingsPage = () => {
   const savedTimerValues = JSON.parse(localStorage.getItem("timerValues"));
@@ -44,18 +32,30 @@ const SettingsPage = () => {
     }));
   };
 
+  const handleClearStorage = () => {
+    // Clear the localStorage data for timer values
+    localStorage.removeItem("timerValues");
+    // Reset the timerValues state to the default values
+    setTimerValues(defaultTimerValue);
+  };
+
   const handleSave = () => {
     localStorage.setItem("timerValues", JSON.stringify(timerValues));
   };
 
   return (
     <div
-    className="main-task-background"
-    style={{ backgroundImage: `url(${background})` }}
+      className="main-task-background"
+      style={{ backgroundImage: `url(${background})` }}
     >
       <Container
         className="main-task-container"
-        style={{ height: "100%", alignItems: "top", textAlign: "left", marginTop:"10px" }}
+        style={{
+          height: "100%",
+          alignItems: "top",
+          textAlign: "left",
+          marginTop: "10px",
+        }}
         maxWidth="sm"
       >
         <Typography variant="h4" gutterBottom>
@@ -71,6 +71,7 @@ const SettingsPage = () => {
                 handleValueChange("study", parseInt(e.target.value))
               }
               fullWidth
+              size="small"
             />
           </Grid>
           <Grid item xs={12}>
@@ -82,6 +83,7 @@ const SettingsPage = () => {
                 handleValueChange("short", parseInt(e.target.value))
               }
               fullWidth
+              size="small"
             />
           </Grid>
           <Grid item xs={12}>
@@ -93,6 +95,7 @@ const SettingsPage = () => {
                 handleValueChange("long", parseInt(e.target.value))
               }
               fullWidth
+              size="small"
             />
           </Grid>
           <Grid item xs={12}>
@@ -104,6 +107,7 @@ const SettingsPage = () => {
                 handleValueChange("revise", parseInt(e.target.value))
               }
               fullWidth
+              size="small"
             />
           </Grid>
           <Grid item xs={12}>
@@ -112,17 +116,37 @@ const SettingsPage = () => {
                 <Checkbox
                   checked={timerValues.bell}
                   onChange={() => handleToggleChange("bell")}
+                  size="small"
                 />
               }
               label="Enable Bell"
             />
-          </Grid>
-          <Grid item xs={12}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={timerValues.quotes}
+                  onChange={() => handleToggleChange("quotes")}
+                  size="small"
+                />
+              }
+              label="Enable Quotes"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={timerValues.preventSleep}
+                  onChange={() => handleToggleChange("preventSleep")}
+                  size="small"
+                />
+              }
+              label="Prevent Sleep"
+            />
             <FormControlLabel
               control={
                 <Checkbox
                   checked={timerValues.notification}
                   onChange={() => handleToggleChange("notification")}
+                  size="small"
                 />
               }
               label="Enable Notifications"
@@ -134,9 +158,20 @@ const SettingsPage = () => {
                 <Checkbox
                   checked={timerValues.whiteNoise}
                   onChange={() => handleToggleChange("whiteNoise")}
+                  size="small"
                 />
               }
               label="Enable White Noise"
+            />
+            <TextField
+              type="number"
+              label="White Noise Volume (1-100)"
+              value={timerValues.whiteNoiseVolume}
+              onChange={(e) =>
+                handleValueChange("whiteNoiseVolume", parseInt(e.target.value))
+              }
+              fullWidth
+              size="small"
             />
           </Grid>
           <Grid item xs={12}>
@@ -145,9 +180,23 @@ const SettingsPage = () => {
                 <Checkbox
                   checked={timerValues.whiteNoiseRevision}
                   onChange={() => handleToggleChange("whiteNoiseRevision")}
+                  size="small"
                 />
               }
               label="Enable White Noise for Revision"
+            />
+            <TextField
+              type="number"
+              label="White Noise Revision Volume (1-100)"
+              value={timerValues.whiteNoiseRevisionVolume}
+              onChange={(e) =>
+                handleValueChange(
+                  "whiteNoiseRevisionVolume",
+                  parseInt(e.target.value)
+                )
+              }
+              fullWidth
+              size="small"
             />
           </Grid>
           <Grid item xs={12}>
@@ -156,20 +205,20 @@ const SettingsPage = () => {
                 <Checkbox
                   checked={timerValues.motivation}
                   onChange={() => handleToggleChange("motivation")}
+                  size="small"
                 />
               }
               label="Enable Motivation Music"
             />
-          </Grid>
-          <Grid item xs={12}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={timerValues.quotes}
-                  onChange={() => handleToggleChange("quotes")}
-                />
+            <TextField
+              type="number"
+              label="Motivation Music Volume (1-100)"
+              value={timerValues.motivationVolume}
+              onChange={(e) =>
+                handleValueChange("motivationVolume", parseInt(e.target.value))
               }
-              label="Enable Quotes"
+              fullWidth
+              size="small"
             />
           </Grid>
         </Grid>
@@ -178,20 +227,32 @@ const SettingsPage = () => {
           color="primary"
           onClick={handleSave}
           fullWidth
+          size="small"
           style={{ marginTop: "16px" }}
         >
           Save
         </Button>
         <Button
-        variant="contained"
-        color="secondary"
-        fullWidth
-        style={{ marginTop: "16px" }}
-        component={Link}
-        to="/"
-      >
-        Go back to Main
-      </Button>
+          variant="contained"
+          color="secondary"
+          fullWidth
+          size="small"
+          style={{ marginTop: "16px" }}
+          component={Link}
+          to="/"
+        >
+          Go back to Main
+        </Button>
+        <Button
+          variant="contained"
+          color="error"
+          fullWidth
+          size="small"
+          style={{ marginTop: "16px" }}
+          onClick={handleClearStorage}
+        >
+          Clear Storage
+        </Button>
       </Container>
     </div>
   );

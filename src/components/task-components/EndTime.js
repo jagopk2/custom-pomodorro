@@ -27,6 +27,9 @@ const EndTime = memo((props) => {
     whiteNoise,
     motivation,
     whiteNoiseRevision,
+    whiteNoiseVolume, // Add white noise volume setting
+    motivationVolume, // Add motivation music volume setting
+    whiteNoiseRevisionVolume, // Add white noise revision volume setting
   } = useContext(timerContext);
   const [audio, setAudio] = useState(null);
 
@@ -48,7 +51,7 @@ const EndTime = memo((props) => {
   } else if (pomodoroType === "long_break") {
     endTimeDelta = long;
   } else if (pomodoroType === "revision") {
-    endTimeDelta = revise; // Use the revise timer value
+    endTimeDelta = revise;
   }
 
   endTime.setMinutes(endTime.getMinutes() + Math.round(endTimeDelta / 60));
@@ -56,25 +59,26 @@ const EndTime = memo((props) => {
 
   const onClickHandler = () => {
     // Stop any previously playing audio
-    // Stop any previously playing audio
-    console.log(audio, timerStarted);
     if (audio) {
       audio.pause();
       audio.currentTime = 0;
     }
 
     if (!timerStarted) {
-      // Play the appropriate sound based on the timer type
+      // Play the appropriate sound based on the timer type and user settings
       if (pomodoroType === "pomodoro" && whiteNoise) {
         const newAudio = new Audio(wn);
+        newAudio.volume = whiteNoiseVolume / 100; // Set volume based on user settings
         setAudio(newAudio);
         newAudio.play();
       } else if (pomodoroType === "short_break" && motivation) {
         const newAudio = new Audio(motivation1);
+        newAudio.volume = motivationVolume / 100; // Set volume based on user settings
         setAudio(newAudio);
         newAudio.play();
       } else if (pomodoroType === "revision" && whiteNoiseRevision) {
         const newAudio = new Audio(wn);
+        newAudio.volume = whiteNoiseRevisionVolume / 100; // Set volume based on user settings
         setAudio(newAudio);
         newAudio.play();
       }
